@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Comment</title>
+    <style>
+        .comment-box {
+            background-color: aqua;
+            border-radius: 10px;
+            border: 2px solid black;
+            box-shadow: 5px 5px 2px gray;
+            margin: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="comment-list">
+
+    </div>
+    <script>
+        fetch('https://jsonplaceholder.typicode.com/comments')
+            .then(res => res.json())
+            .then(data => commentList(data))
+
+        function commentList(data) {
+            let comment = ' ';
+
+            for (let i = 0; i < 10; i++) {
+
+                const commentData = data[i];
+
+                comment = comment + `<div class="comment-box">
+                    <h1>Name : ${commentData.name}</h1>
+                    <h3>Email : ${commentData.email}</h3>
+                    <p>Comment : ${commentData.body}</p>    
+                    </div>`;
+
+
+            }
+            const showComment = document.getElementById('comment-list');
+            showComment.innerHTML = comment;
+
+        }
+    </script>
+</body>
+
+</html>

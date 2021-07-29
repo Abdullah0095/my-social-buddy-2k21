@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <style>
+        
+        .user-box{
+            width: 270px;
+            height: 330px;
+            float: left;
+            margin-left: 10px;
+            margin-right: 20px;
+            margin-top: 30px;
+            border: 2px solid maroon;
+            padding: 10px;
+            border-radius: 20px;
+            margin-bottom: 5px;
+            text-align: center;
+            background-color: rgb(13, 15, 15); 
+            color: white;      
+        }
+        .user-box img{
+            border: 3px solid maroon;
+            border-radius: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <div style="background-color: rgb(9, 14, 11); color: white;text-align: center;height: 40px;">
+            <h1>My Social Buddy</h1>
+        </div>
+        <div id="user-data"></div>
+    </div>
+    <script>
+        // special api https://randomuser.me/api/?results=100
+        fetch('https://randomuser.me/api/?results=100')
+        .then(res => res.json())
+        .then(data => randomUser(data))
+
+        function randomUser(data){
+            
+            let user = ' ';
+            for (let i = 0; i < 30; i++) {
+                const element = data.results[i];
+                
+                user = user + 
+                    `<div class = "user-box">
+                        <img src= ${element.picture.large} alt="">
+                        <h1>${element.name.title} ${element.name.first} ${element.name.last}</h1>
+                        <p>${element.email}</p>
+                        <h3>${element.location.state}, ${element.location.city} , ${element. location.country}</h3>
+                    </div>`;
+
+                    console.log(data.results)
+      
+            }
+
+            const users = document.getElementById('user-data');
+            users.innerHTML = user;
+                
+            }
+        
+    </script>
+</body>
+</html>
